@@ -1,141 +1,251 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalTech Competitor Monitor</title>
 <style>
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f6; padding: 20px;}
-h2 { color: #2c3e50; border-bottom: 3px solid #e74c3c; padding-bottom: 10px;}
-table { font-family: arial, sans-serif; border-collapse: collapse; width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: white;}
-td, th { border: 1px solid #ecf0f1; text-align: left; padding: 12px; }
-th { background-color: #34495e; color: white; }
-tr:nth-child(even) { background-color: #fdfefe; }
-tr:hover { background-color: #d5f5e3; cursor: pointer; }
-.cat-tag { font-size: 0.8em; padding: 2px 8px; border-radius: 4px; color: white; font-weight: bold;}
-.tech { background-color: #3498db; }
-.furn { background-color: #e67e22; }
-.off { background-color: #27ae60; }
-.price { font-weight: bold; color: #2c3e50; }
+    /* Reset y Fuente General */
+    body {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 40px;
+        color: #333;
+    }
+    
+    /* Contenedor Principal (Tarjeta) */
+    .container {
+        max_width: 1000px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    /* Encabezado */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .logo h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #1a1a1a;
+        letter-spacing: -0.5px;
+    }
+    
+    .logo span { color: #0066FF; } /* Azul Corporativo */
+
+    .meta-info {
+        text-align: right;
+        font-size: 13px;
+        color: #666;
+    }
+
+    /* Tabla */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th {
+        text-align: left;
+        padding: 15px;
+        background-color: #f8f9fa;
+        color: #555;
+        font-weight: 600;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    td {
+        padding: 15px;
+        border-bottom: 1px solid #f0f0f0;
+        vertical-align: middle;
+        font-size: 14px;
+    }
+
+    tr:hover { background-color: #f8faff; } /* Efecto Hover sutil */
+
+    /* Etiquetas de Categoría (Badges) */
+    .badge {
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .tech { background-color: #e3f2fd; color: #1565c0; }
+    .furn { background-color: #fff3e0; color: #ef6c00; }
+    .off { background-color: #e8f5e9; color: #2e7d32; }
+
+    /* Precios */
+    .price {
+        font-weight: bold;
+        font-family: 'Consolas', monospace;
+        color: #2c3e50;
+    }
+
+    /* Stock Status */
+    .status-dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .green { background-color: #2ecc71; }
+    .orange { background-color: #f1c40f; }
+    .red { background-color: #e74c3c; }
+
 </style>
 </head>
 <body>
 
-<h2>🛡️ Competitor Price Monitor <small style="color: #7f8c8d; font-size: 0.6em;">Live Feed</small></h2>
-<p><strong>Tracking:</strong> Technology, Furniture & Office Supplies | <strong>Date:</strong> 2014-12-31</p>
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <h1>GlobalTech <span>Intelligence</span></h1>
+        </div>
+        <div class="meta-info">
+            <p><strong>Report:</strong> Competitor Pricing Benchmark</p>
+            <p><strong>Date:</strong> 2014-12-31 | <strong>Source:</strong> Automated Bot</p>
+        </div>
+    </div>
 
-<table id="competitor-prices">
-  <tr>
-    <th>Category</th>
-    <th>Product Name (SKU)</th>
-    <th>Competitor Price ($)</th>
-    <th>Marketplace</th>
-    <th>Status</th>
-  </tr>
-  <tr>
-    <td><span class="cat-tag tech">Technology</span></td>
-    <td>Apple Smart Phone, Full Size</td>
-    <td class="price">478.09</td>
-    <td>Amazon</td>
-    <td>In Stock</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag tech">Technology</span></td>
-    <td>Cisco Smart Phone, Full Size</td>
-    <td class="price">503.69</td>
-    <td>AliExpress</td>
-    <td>Out of Stock</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag tech">Technology</span></td>
-    <td>Motorola Smart Phone, Full Size</td>
-    <td class="price">587.95</td>
-    <td>IKEA</td>
-    <td>Only 2 left</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag tech">Technology</span></td>
-    <td>Nokia Smart Phone, Full Size</td>
-    <td class="price">438.16</td>
-    <td>BestBuy</td>
-    <td>Only 2 left</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag tech">Technology</span></td>
-    <td>Canon imageCLASS 2200 Advanced Copier</td>
-    <td class="price">3138.25</td>
-    <td>Amazon</td>
-    <td>Only 2 left</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag furn">Furniture</span></td>
-    <td>Hon Executive Leather Armchair, Adjustable</td>
-    <td class="price">281.67</td>
-    <td>OfficeDepot</td>
-    <td>Only 2 left</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag furn">Furniture</span></td>
-    <td>Office Star Executive Leather Armchair, Adjustable</td>
-    <td class="price">337.07</td>
-    <td>OfficeDepot</td>
-    <td>Only 2 left</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag furn">Furniture</span></td>
-    <td>Harbour Creations Executive Leather Armchair, Adjustable</td>
-    <td class="price">298.47</td>
-    <td>BestBuy</td>
-    <td>Only 2 left</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag furn">Furniture</span></td>
-    <td>SAFCO Executive Leather Armchair, Black</td>
-    <td class="price">411.26</td>
-    <td>Walmart</td>
-    <td>Only 2 left</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag furn">Furniture</span></td>
-    <td>Novimex Executive Leather Armchair, Adjustable</td>
-    <td class="price">383.94</td>
-    <td>OfficeDepot</td>
-    <td>Out of Stock</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag off">Office Supplies</span></td>
-    <td>Eldon File Cart, Single Width</td>
-    <td class="price">109.8</td>
-    <td>Target</td>
-    <td>Out of Stock</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag off">Office Supplies</span></td>
-    <td>Hoover Stove, White</td>
-    <td class="price">539.16</td>
-    <td>Walmart</td>
-    <td>Out of Stock</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag off">Office Supplies</span></td>
-    <td>Hoover Stove, Red</td>
-    <td class="price">558.84</td>
-    <td>IKEA</td>
-    <td>Out of Stock</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag off">Office Supplies</span></td>
-    <td>Rogers File Cart, Single Width</td>
-    <td class="price">105.63</td>
-    <td>Walmart</td>
-    <td>Only 2 left</td>
-  </tr>
-  <tr>
-    <td><span class="cat-tag off">Office Supplies</span></td>
-    <td>Smead Lockers, Industrial</td>
-    <td class="price">171.66</td>
-    <td>Target</td>
-    <td>In Stock</td>
-  </tr>
-</table>
-<p style="text-align: center; color: #95a5a6; margin-top: 20px; font-size: 0.8em;">Generated by GlobalTech Scraper Bot v4.0</p>
+    <table id="prices-table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Product SKU</th>
+                <th>Competitor Price</th>
+                <th>Marketplace</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td><span class="badge tech">Technology</span></td>
+                <td><strong>Apple Smart Phone, Full Size</strong></td>
+                <td class="price">$529.67</td>
+                <td>IKEA</td>
+                <td><span class="status-dot orange"></span>Low Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge tech">Technology</span></td>
+                <td><strong>Cisco Smart Phone, Full Size</strong></td>
+                <td class="price">$481.87</td>
+                <td>BestBuy</td>
+                <td><span class="status-dot orange"></span>Low Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge tech">Technology</span></td>
+                <td><strong>Motorola Smart Phone, Full Size</strong></td>
+                <td class="price">$507.25</td>
+                <td>Amazon</td>
+                <td><span class="status-dot green"></span>In Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge tech">Technology</span></td>
+                <td><strong>Nokia Smart Phone, Full Size</strong></td>
+                <td class="price">$579.74</td>
+                <td>AliExpress</td>
+                <td><span class="status-dot orange"></span>Low Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge tech">Technology</span></td>
+                <td><strong>Canon imageCLASS 2200 Advanced Copier</strong></td>
+                <td class="price">$3,340.17</td>
+                <td>Walmart</td>
+                <td><span class="status-dot green"></span>In Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge furn">Furniture</span></td>
+                <td><strong>Hon Executive Leather Armchair, Adjustable</strong></td>
+                <td class="price">$366.83</td>
+                <td>IKEA</td>
+                <td><span class="status-dot red"></span>Sold Out</td>
+            </tr>
+            <tr>
+                <td><span class="badge furn">Furniture</span></td>
+                <td><strong>Office Star Executive Leather Armchair, Adjustable</strong></td>
+                <td class="price">$294.42</td>
+                <td>BestBuy</td>
+                <td><span class="status-dot orange"></span>Low Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge furn">Furniture</span></td>
+                <td><strong>Harbour Creations Executive Leather Armchair, Adjustable</strong></td>
+                <td class="price">$305.48</td>
+                <td>Walmart</td>
+                <td><span class="status-dot red"></span>Sold Out</td>
+            </tr>
+            <tr>
+                <td><span class="badge furn">Furniture</span></td>
+                <td><strong>SAFCO Executive Leather Armchair, Black</strong></td>
+                <td class="price">$374.63</td>
+                <td>Target</td>
+                <td><span class="status-dot orange"></span>Low Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge furn">Furniture</span></td>
+                <td><strong>Novimex Executive Leather Armchair, Adjustable</strong></td>
+                <td class="price">$354.48</td>
+                <td>Amazon</td>
+                <td><span class="status-dot green"></span>In Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge off">Office Supplies</span></td>
+                <td><strong>Eldon File Cart, Single Width</strong></td>
+                <td class="price">$120.50</td>
+                <td>IKEA</td>
+                <td><span class="status-dot green"></span>In Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge off">Office Supplies</span></td>
+                <td><strong>Hoover Stove, White</strong></td>
+                <td class="price">$443.16</td>
+                <td>BestBuy</td>
+                <td><span class="status-dot red"></span>Sold Out</td>
+            </tr>
+            <tr>
+                <td><span class="badge off">Office Supplies</span></td>
+                <td><strong>Hoover Stove, Red</strong></td>
+                <td class="price">$556.79</td>
+                <td>AliExpress</td>
+                <td><span class="status-dot red"></span>Sold Out</td>
+            </tr>
+            <tr>
+                <td><span class="badge off">Office Supplies</span></td>
+                <td><strong>Rogers File Cart, Single Width</strong></td>
+                <td class="price">$89.67</td>
+                <td>Amazon</td>
+                <td><span class="status-dot orange"></span>Low Stock</td>
+            </tr>
+            <tr>
+                <td><span class="badge off">Office Supplies</span></td>
+                <td><strong>Smead Lockers, Industrial</strong></td>
+                <td class="price">$148.03</td>
+                <td>Target</td>
+                <td><span class="status-dot red"></span>Sold Out</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="text-align: center; margin-top: 30px; font-size: 12px; color: #999;">
+        CONFIDENTIAL - Internal Use Only | Generated by GlobalTech Data Systems
+    </p>
+</div>
+
 </body>
 </html>
